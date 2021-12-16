@@ -18,7 +18,7 @@ function App() {
     const [peerRows,setPeerRows] = useState();
 
     React.useEffect(() => {
-        axios.get(`http://192.168.10.1/stats`)
+        axios.get(`http://gateway/stats`)
             .then(res => {
                 if (res.data) {
                     setData(res.data);
