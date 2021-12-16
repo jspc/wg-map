@@ -1,5 +1,3 @@
-import React, {useState} from 'react';
-
 import Flag from 'react-world-flags';
 
 import Timestamp from './timestamp';
