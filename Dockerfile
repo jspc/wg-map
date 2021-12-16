@@ -7,7 +7,7 @@ RUN apk add --update ca-certificates
 ADD go.* ./
 ADD *.go ./
 
-RUN CGO_ENABLED=0 go build -o app
+RUN CGO_ENABLED=0 go build -o app && strip app
 
 FROM scratch
 
