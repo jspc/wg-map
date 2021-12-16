@@ -6,7 +6,7 @@ import StatsTable from './statsTable';
 import PeerTable from './peerTable';
 
 export default function Table(props) {
-    const {data} = props;
+    const {data, peerRows} = props;
 
     return(
         <>
@@ -20,7 +20,7 @@ export default function Table(props) {
             </Grid>
 
             <Grid item sm={12} lg={6} xl={6}>
-              <PeerTable data={data}/>
+              <PeerTable peerRows={peerRows} />
             </Grid>
 
           </Grid>

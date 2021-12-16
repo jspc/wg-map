@@ -8,11 +8,14 @@ import PeerMarker from './components/peerMarker';
 
 import Map from './components/map';
 import Table from './components/table';
+import {PeerRow} from './components/peerTable';
 
 function App() {
     const [serverMarker, setServerMarker] = useState();
     const [peerMarkers,setPeerMarkers] = useState([]);
+
     const [data,setData] = useState();
+    const [peerRows,setPeerRows] = useState();
 
     React.useEffect(() => {
         axios.get(`http://192.168.10.1/stats`)
@@ -27,7 +30,11 @@ function App() {
                                             publicKey={res.data.publicKey}
                                             received={res.data.received}
                                             sent={res.data.sent}
-                              />);
+                                    />);
+
+                    setPeerRows(res.data.peer.map((o) => (
+                        <PeerRow peer={o} />
+                    )));
 
                     setPeerMarkers(res.data.peer.map((o) => (
                         <PeerMarker serverPos={serverPos} peer={o} />
@@ -46,7 +53,7 @@ function App() {
               </h1>
 
               <Map server={serverMarker} peers={peerMarkers} />
-              <Table data={data} />
+              <Table data={data} peerRows={peerRows} />
             </div>
     );
 }

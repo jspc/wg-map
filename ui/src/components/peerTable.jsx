@@ -5,11 +5,11 @@ import Flag from 'react-world-flags';
 import Timestamp from './timestamp';
 import { ByName } from './countryCode';
 
-function PeerRow(props) {
+export function PeerRow(props) {
     const {peer} = props;
 
     return (
-        <tr>
+        <tr key={peer.publicKey}>
           <td>
             <Flag
               code={ByName(peer.addr.country)}
@@ -42,15 +42,7 @@ function PeerRow(props) {
 }
 
 export default function PeerTable(props) {
-    const {data} = props;
-    const [peers, setPeers] = useState([]);
-
-    React.useEffect(() => {
-        setPeers(
-            data && data.peer.map((o) => (
-            <PeerRow peer={o}/>
-        )));
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const {peerRows} = props;
 
     return (
         <>
@@ -86,7 +78,7 @@ export default function PeerTable(props) {
             </thead>
 
             <tbody>
-              { peers }
+              { peerRows }
             </tbody>
           </table>
         </>
