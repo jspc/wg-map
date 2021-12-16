@@ -1,13 +1,13 @@
 FROM golang:1.17.3-alpine as build
 
 WORKDIR /app
-RUN apk add --update ca-certificates
+RUN apk add --update ca-certificates upx
 
 # Only add go specific sources to avoid large build contexts
 ADD go.* ./
 ADD *.go ./
 
-RUN CGO_ENABLED=0 go build -o app && strip app
+RUN CGO_ENABLED=0 go build -o app -ldflags="-s -w" && upx app
 
 FROM scratch
 
