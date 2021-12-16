@@ -4,12 +4,13 @@ import {
     Polyline
 } from 'react-leaflet';
 import Gravatar from 'react-gravatar';
-import Curve from './curve';
-
 import {
     FcUpload,
     FcDownload,
 } from "react-icons/fc";
+
+import Curve from './curve';
+import Timestamp from './timestamp';
 
 export default function PeerMarker(props) {
     const {peer, serverPos} = props;
@@ -43,7 +44,7 @@ function PeerPopup(props) {
           </div>
           <div>
             <p>
-              <i>Last seen: {peer.handshake}</i>
+              <i>Last seen: <Timestamp when={peer.handshake}/></i>
             </p>
 
             <pre>

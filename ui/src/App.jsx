@@ -2,6 +2,7 @@ import './App.css';
 
 import React, {useState} from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 import ServerMarker from './components/serverMarker';
 import PeerMarker from './components/peerMarker';
@@ -38,7 +39,12 @@ function App() {
                     <PeerRow peer={o} />
                 )));
 
-                setPeerMarkers(res.data.peer.map((o) => (
+                // Only show peers on map if they've been active in the last hour
+                // (we still show them in the table, of course)
+                const anHourAgo = moment().subtract(1, 'hours');
+                setPeerMarkers(res.data.peer.filter((x) => {
+                    return moment(x.handshake) >= anHourAgo;
+                }).map((o) => (
                     <PeerMarker serverPos={serverPos} peer={o} />
                 )));
             }
