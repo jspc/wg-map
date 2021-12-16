@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+div.popup{
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+div.popup h2 {
+    margin-left: 10px;
+}
+
+img.react-gravatar {
+    border-radius: 50%;
+}
+
+.icon-red {
+    color: red;
+}
