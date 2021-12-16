@@ -1,43 +1,10 @@
-import React, {useState} from 'react';
-
-import axios from 'axios';
 import {
     MapContainer,
     TileLayer,
-    Marker,
-    Popup,
-    Polyline,
 } from 'react-leaflet';
 
-import ServerMarker from './serverMarker';
-import PeerMarker from './peerMarker';
-
 export default function Map(props) {
-    const [server, setServer] = useState();
-    const [peers,setPeers] = useState([]);
-
-    React.useEffect(() => {
-        axios.get(`http://192.168.10.1/stats`)
-            .then(res => {
-                if (res.data) {
-                    const serverPos = [res.data.lat, res.data.long];
-
-                    setServer(<ServerMarker pos={serverPos}
-                                            address={res.data.address}
-                                            publicKey={res.data.publicKey}
-                                            received={res.data.received}
-                                            sent={res.data.sent}
-                              />);
-
-                    setPeers(res.data.peer.map((o) => (
-                        <PeerMarker serverPos={serverPos} peer={o} />
-                    )));
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    },[]); // eslint-disable-line react-hooks/exhaustive-deps
+    const {server, peers} = props;
 
     return (
         <>

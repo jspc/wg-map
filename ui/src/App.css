@@ -19,3 +19,12 @@ img.react-gravatar {
 .icon-red {
     color: red;
 }
+
+th, td {
+    padding: 6px;
+}
+
+table {
+    text-align: left;
+    margin: 0 auto;
+}
